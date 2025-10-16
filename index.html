@@ -1,666 +1,708 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>نموذج رحلة طيران - خاطرك للسفريات</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تحديث أسعار الطيران - خاطرك</title>
+  <meta name="description" content="نظام تحديث أسعار تذاكر الطيران - خاطرك للسفريات والسياحة">
+  <meta name="theme-color" content="#0a1d90">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    
     body {
-      font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f8f9fa;
-      padding: 20px;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-    h1 {
-      text-align: center;
-      font-size: 24px;
-      color: #1a56db;
-      margin-bottom: 10px;
-    }
-    h2 {
-      font-size: 18px;
-      color: #1a56db;
-      margin-bottom: 15px;
-    }
-    .logo-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .logo {
-      width: 150px;
-      height: auto;
-      margin: 0 auto 10px;
-    }
-    .company-name {
-      font-weight: bold;
-      font-size: 16px;
-      color: #333;
-    }
-    .form-group {
-      margin-bottom: 18px;
-    }
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-      color: #333;
-    }
-    input, select, textarea {
-      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
+      min-height: 100vh;
     }
-    button {
-      padding: 10px 15px;
-      background: #1a56db;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
+    
+    .container {
+      max-width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(10, 29, 144, 0.15);
+      overflow: hidden;
+      margin: 0 auto;
     }
-    button:hover {
-      background: #0d47a1;
-    }
-    .trip-section {
-      background: #f0f7ff;
+    
+    .header {
+      background: white;
+      color: #0a1d90;
       padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #d0e3ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-bottom: 3px solid #0a1d90;
     }
-    .flight-leg {
-      background: #eef6ff;
+    
+    .header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.3;
+    }
+    
+    .header p {
+      margin: 0;
+      font-size: 14px;
+      color: #ff3007;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    .header-img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+    }
+    
+    .logo-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 10px;
+    }
+    
+    .controls {
+      padding: 15px;
+      background: #e3f2fd;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .input-group label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #0a1d90;
+    }
+    
+    .controls select, .controls input, .controls button {
       padding: 12px;
-      margin: 10px 0;
-      border-radius: 6px;
+      font-size: 14px;
+      border: 1px solid #0055aa;
+      border-radius: 12px;
+      width: 100%;
+    }
+    
+    .button-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    
+    .button-group button {
+      padding: 10px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .controls button {
+      background: #003366;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .controls button:hover {
+      background: #002244;
+      transform: translateY(-2px);
+    }
+    
+    .controls button.add {
+      background: #28a745;
+    }
+    
+    .controls button.add:hover {
+      background: #218838;
+    }
+    
+    .controls button.print {
+      background: #007bff;
+    }
+    
+    .controls button.clear {
+      background: #dc3545;
+    }
+    
+    .controls button.clear:hover {
+      background: #c82333;
+    }
+    
+    .controls button.download {
+      background: #ffc107;
+      color: #003366;
+    }
+    
+    .controls button.download:hover {
+      background: #e0a800;
+    }
+    
+    .controls button.text {
+      background: #6f42c1;
+      color: white;
+    }
+    
+    .controls button.text:hover {
+      background: #5a2d9c;
+    }
+    
+    .quantity {
+      width: 100% !important;
+      text-align: center;
+    }
+    
+    .content {
+      padding: 15px;
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 6px;
+      font-size: 14px;
+      min-width: 600px;
+    }
+    
+    th {
+      background: linear-gradient(1deg, #005cb2, #003a7d);
+      color: white;
+      padding: 12px 8px;
+      text-align: center;
+      border-radius: 12px 12px 0 0;
+      border-bottom: 2px solid #ff0000;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    
+    td {
+      padding: 10px 6px;
+      text-align: center;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: all 0.2s ease;
+      font-size: 13px;
+      min-width: 80px;
+    }
+    
+    td:hover {
+      background-color: #f8f9fa;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    }
+    
+    .one-way {
+      color: #28a745;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .return {
+      color: #003366;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .date-bold, .day-bold {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .editable {
+      cursor: pointer;
       position: relative;
     }
-    .hidden {
-      display: none;
+    
+    .editable:focus {
+      outline: 2px solid #0055aa;
+      border-radius: 8px;
+      background-color: #f0f8ff;
     }
-    .divider {
-      text-align: center;
-      margin: 15px 0;
-      color: #555;
-    }
+    
     .delete-btn {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      background: #e53e3e;
-      color: white;
-      border: none;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 12px;
+      color: #ef4444;
+      font-size: 20px;
+      line-height: 1;
       cursor: pointer;
-    }
-    .required {
-      color: red;
-    }
-    .terminal-group {
+      transition: color 0.3s ease;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 24px;
+      height: 24px;
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
     }
-    .terminal-group .form-group {
-      flex: 1;
-      min-width: 200px;
+    
+    .delete-btn:hover {
+      color: #dc2626;
+      background: rgba(239, 68, 68, 0.1);
+      border-radius: 50%;
+    }
+    
+    .delete-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 12px;
+      background: linear-gradient(179deg, #005cb2, #0b2d55);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    .footer a {
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .timestamp {
+      text-align: center;
+      font-size: 15px;
+      color: #003366;
+      padding: 8px;
+      background: #f8f9fa;
+      font-weight: bold;
+      border-top: 1px solid #003366;
+      border-bottom: 2px solid #003366;
+    }
+    
+    @media print {
+      .controls, .no-print {
+        display: none !important;
+      }
+      .delete-header, .delete-column {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 16px;
+      }
+      
+      .header p {
+        font-size: 12px;
+      }
+      
+      .header-img {
+        height: 40px;
+      }
+      
+      .button-group {
+        grid-template-columns: 1fr;
+      }
+      
+      th, td {
+        padding: 8px 4px;
+        font-size: 12px;
+      }
+      
+      .timestamp {
+        font-size: 13px;
+        padding: 6px;
+      }
+      
+      .footer {
+        font-size: 14px;
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Logo & Header -->
-    <div class="logo-container">
-      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGcgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iIzAwODhlYiIgZD0iTTEwMCA1MEwxMDAgMjVIMDAgMjVMMDAgNTBMMC4wMDAxMDk0NzEgNzVIMTAwTDExIDA3NSIvPjxwYXRoIGZpbGw9IiMwMDg4ZWIiIGQ9Ik0yNSA1MFMyNSAzNSA0MCAzNSA0MCA1MFMzNSA2NSAyNSA2NSIvPjxwYXRoIGZpbGw9IiMwMDg4ZWIiIGQ9Ik03NSA1MFMyNSA1MCA3NSA3NSA3NSA1MCIvPjxwYXRoIGZpbGw9IiNmZjgwMDAiIGQ9Ik0zMCA4MGMtMTAgMCAtMTAgLTEwIC0xMCAxMCIvPjxwYXRoIGZpbGw9IiMwMDg4ZWIiIGQ9Ik00MCA1MEM0MCAzNSA2MCAzNSA2MCA1MFM1MCA2NSA0MCA2NSIvPjxwYXRoIGZpbGw9IiMwMDg4ZWIiIGQ9Ik02MCA1MEM2MCAzNSA4MCAzNSA4MCA1MFM3MCA2NSA2MCA2NSIvPjxwYXRoIGZpbGw9IiMwMDg4ZWIiIGQ9Ik04MCA1MEM4MCAzNSA5NSAzNSA5NSA1MFM4NSA2NSA4MCA2NSIvPjx0ZXh0IGZpbGw9IiMwMDg4ZWIiIGZvbnQtZmFtaWx5PSJUYWphd2FsIiBmb250LXNpemU9IjE0IiB4PSIzMiIgeT0iOTAiPljYqOaRnOWKsOaXtuWIsOaYr+WImeacmTwvdGV4dD48dGV4dCBmaWxsPSIjMDA4OGViIiBmb250LWZhbWlseT0iVGFqYXdhbCIgZm9udC1zaXplPSIxMSIgeD0iMjUiIHk9Ijk4Ij7YqOaRnOWKsOaXtuWIsOaYr+WImeacmTwvdGV4dD48L2c+PC9zdmc+" alt="شعار خاطرك للسفريات" class="logo">
-      <div class="company-name">خاطرك للسفريات والسياحة</div>
-      <div style="font-size:12px; color:#666;">خدمات الحج، العمرة، والرحلات الدولية</div>
-    </div>
-
-    <!-- Passenger Name -->
-    <div class="form-group">
-      <label for="passengerName">اسم المسافر <span class="required">*</span>:</label>
-      <input type="text" id="passengerName" placeholder="أدخل اسم المسافر" required>
-    </div>
-
-    <!-- Trip Type -->
-    <div class="form-group">
-      <label for="tripType">نوع الرحلة:</label>
-      <select id="tripType" onchange="toggleReturnSection()">
-        <option value="oneway">رحلة الذهاب فقط</option>
-        <option value="roundtrip">رحلة الذهاب والعودة</option>
-      </select>
-    </div>
-
-    <!-- Outbound Trip -->
-    <div class="trip-section">
-      <h2>رحلة الذهاب</h2>
-      <div class="form-group">
-        <label>تاريخ الرحلة:</label>
-        <input type="date" id="outboundDate" value="2025-10-12">
+  <div class="container" id="print-area">
+    <div class="header">
+      <div class="logo-container">
+        <img src="https://khatruktravel.github.io/seatprices/Logo-Yemenia.png" alt="شعار خاطرك للسفريات" class="header-img">
+        <img src="https://khatruktravel.github.io/seatprices/512.png" alt="شعار إضافي" class="header-img">
       </div>
-      <div class="form-group">
-        <label>شركة الطيران:</label>
-        <select id="outboundAirline" onchange="checkCustomAirline(this, 'outboundCustomAirline')">
-          <option value="طيران اليمنية">طيران اليمنية</option>
-          <option value="الاتحاد للطيران">الاتحاد للطيران</option>
-          <option value="العربية للطيران">العربية للطيران</option>
-          <option value="طيران الإمارات">طيران الإمارات</option>
-          <option value="الخطوط الجوية القطرية">الخطوط الجوية القطرية</option>
-          <option value="الخطوط التركية">الخطوط التركية</option>
-          <option value="الخطوط الجوية الاثيوبية">الخطوط الجوية الاثيوبية</option>
-          <option value="الخطوط الجوية الأذربيجانية">الخطوط الجوية الأذربيجانية</option>
-          <option value="الخطوط الجوية الفرنسية">الخطوط الجوية الفرنسية</option>
-          <option value="الخطوط الجوية الكويتية">الخطوط الجوية الكويتية</option>
-          <option value="الخطوط السعودية">الخطوط السعودية</option>
-          <option value="الطيران العماني">الطيران العماني</option>
-          <option value="طيران السلام">طيران السلام</option>
-          <option value="الملكية الأردنية">الملكية الأردنية</option>
-          <option value="طيران الخليج">طيران الخليج</option>
-          <option value="طيران الشرق الأوسط">طيران الشرق الأوسط</option>
-          <option value="طيران ايجين">طيران ايجين</option>
-          <option value="فلاي اديل">فلاي اديل</option>
-          <option value="فلاي ناس">فلاي ناس</option>
-          <option value="فلاي دبي">فلاي دبي</option>
-          <option value="مصر للطيران">مصر للطيران</option>
-          <option value="النيل للطيران">النيل للطيران</option>
-          <option value="طيران الجزائر">طيران الجزائر</option>
-          <option value="تونساير (تونس)">تونساير (تونس)</option>
-          <option value="Royal Air Maroc (المغرب)">Royal Air Maroc (المغرب)</option>
-          <option value="الخطوط الجوية اللبنانية">الخطوط الجوية اللبنانية</option>
-          <option value="الخطوط الجوية السورية">الخطوط الجوية السورية</option>
-          <option value="الخطوط الجوية العراقية">الخطوط الجوية العراقية</option>
-          <option value="فلاي جدة (السعودية)">فلاي جدة (السعودية)</option>
-          <option value="الخطوط الجوية السنغافورية">الخطوط الجوية السنغافورية</option>
-          <option value="الخطوط الجوية الماليزية">الخطوط الجوية الماليزية</option>
-          <option value="الخطوط الجوية التايلاندية">الخطوط الجوية التايلاندية</option>
-          <option value="الهند للطيران (الهند)">الهند للطيران (الهند)</option>
-          <option value="سبايس جيت (الهند)">سبايس جيت (الهند)</option>
-          <option value="لوفتهانزا (ألمانيا)">لوفتهانزا (ألمانيا)</option>
-          <option value="الخطوط الجوية البريطانية (المملكة المتحدة)">الخطوط الجوية البريطانية (المملكة المتحدة)</option>
-          <option value="إير فرانس (فرنسا)">إير فرانس (فرنسا)</option>
-          <option value="إيبيريا (إسبانيا)">إيبيريا (إسبانيا)</option>
-          <option value="أليطاليا (إيطاليا)">أليطاليا (إيطاليا)</option>
-          <option value="خطوط إيجه الجوية (اليونان)">خطوط إيجه الجوية (اليونان)</option>
-          <option value="الخطوط الجوية الهولندية (KLM) (هولندا)">الخطوط الجوية الهولندية (KLM) (هولندا)</option>
-          <option value="طيران صربيا (صربيا)">طيران صربيا (صربيا)</option>
-          <option value="الخطوط الجوية الاسكندنافية (SAS)">الخطوط الجوية الاسكندنافية (SAS)</option>
-          <option value="Ryanair (أيرلندا) - النقل الجوي">Ryanair (أيرلندا) - النقل الجوي</option>
-          <option value="دلتا للطيران (الولايات المتحدة الأمريكية)">دلتا للطيران (الولايات المتحدة الأمريكية)</option>
-          <option value="أمريكان إيرلاينز (الولايات المتحدة الأمريكية)">أمريكان إيرلاينز (الولايات المتحدة الأمريكية)</option>
-          <option value="يونايتد إيرلاينز (الولايات المتحدة الأمريكية)">يونايتد إيرلاينز (الولايات المتحدة الأمريكية)</option>
-          <option value="طيران كندا (كندا)">طيران كندا (كندا)</option>
-          <option value="خطوط لاتام الجوية (تشيلي/البرازيل)">خطوط لاتام الجوية (تشيلي/البرازيل)</option>
-          <option value="طيران المكسيك (المكسيك)">طيران المكسيك (المكسيك)</option>
-          <option value="خطوط جنوب أفريقيا الجوية (جنوب أفريقيا)">خطوط جنوب أفريقيا الجوية (جنوب أفريقيا)</option>
-          <option value="أخرى">أخرى (أدخل يدويًا)</option>
+      <h1>خاطرك للسفريات والسياحة والحج والعمرة</h1>
+      <p>أسعار تذاكر طيران اليمنية - تحديث مباشر</p>
+    </div>
+    
+    <div class="controls no-print">
+      <div class="input-group">
+        <label for="from-city">من</label>
+        <select id="from-city" required>
+          <option value="">اختر المدينة</option>
+          <option value="عدن-ADE">عدن-ADE</option>
+          <option value="سيئون-GXF">سيئون-GXF</option>
+          <option value="الريان-RIY">الريان-RIY</option>
+          <option value="الغيضة-AAY">الغيضة-AAY</option>
+          <option value="سقطرى-SCT">سقطرى-SCT</option>
+          <option value="صنعاء-SAH">صنعاء-SAH</option>
+          <option value="القاهرة-CAI">القاهرة-CAI</option>
+          <option value="عمان-AMM">عمان-AMM</option>
+          <option value="جدة-JED">جدة-JED</option>
+          <option value="الرياض-RUH">الرياض-RUH</option>
+          <option value="دبي-DXB">دبي-DXB</option>
+          <option value="الكويت-KWI">الكويت-KWI</option>
+          <option value="جيبوتي-JIB">جيبوتي-JIB</option>
+          <option value="اديس-ADD">اديس-ADD</option>
+          <option value="مومباي-BOM">مومباي-BOM</option>
         </select>
-        <input type="text" id="outboundCustomAirline" class="hidden" placeholder="أدخل اسم شركة الطيران">
       </div>
-
-      <div id="outboundFlights">
-        <!-- Flight 1 -->
-        <div class="flight-leg" data-leg="1">
-          <button class="delete-btn" onclick="removeFlight(this)" style="display:none;">❌</button>
-          <h3>الرحلة 1</h3>
-          <div class="form-group">
-            <label>الإقلاع من مطار:</label>
-            <input type="text" class="departureAirport" placeholder="اسم مطار الإقلاع">
-          </div>
-          <div class="form-group">
-            <label>صاله المغادرة:</label>
-            <input type="text" class="departureTerminal" placeholder="مثال: الصالة 1 أو A">
-          </div>
-          <div class="form-group">
-            <label>وقت الإقلاع (24 ساعة):</label>
-            <input type="time" class="departureTime" onchange="updateArrivalDate(this)">
-          </div>
-          <div class="form-group">
-            <label>الوصول إلى مطار:</label>
-            <input type="text" class="arrivalAirport" placeholder="اسم مطار الوصول">
-          </div>
-          <div class="form-group">
-            <label>صاله الوصول:</label>
-            <input type="text" class="arrivalTerminal" placeholder="مثال: الصالة 2 أو B">
-          </div>
-          <div class="form-group">
-            <label>وقت الوصول (24 ساعة):</label>
-            <input type="time" class="arrivalTime">
-          </div>
-        </div>
-      </div>
-
-      <button type="button" onclick="addFlight('outbound')">+ إضافة رحلة تالية</button>
-    </div>
-
-    <!-- Return Trip (Initially Hidden) -->
-    <div class="trip-section hidden" id="returnSection">
-      <h2>رحلة العودة</h2>
-      <div class="form-group">
-        <label>تاريخ الرحلة:</label>
-        <input type="date" id="returnDate" value="2025-11-11">
-      </div>
-      <div class="form-group">
-        <label>شركة الطيران:</label>
-        <select id="returnAirline" onchange="checkCustomAirline(this, 'returnCustomAirline')">
-          <option value="طيران اليمنية">طيران اليمنية</option>
-          <option value="الاتحاد للطيران">الاتحاد للطيران</option>
-          <option value="العربية للطيران">العربية للطيران</option>
-          <option value="طيران الإمارات">طيران الإمارات</option>
-          <option value="الخطوط الجوية القطرية">الخطوط الجوية القطرية</option>
-          <option value="الخطوط التركية">الخطوط التركية</option>
-          <option value="الخطوط الجوية الاثيوبية">الخطوط الجوية الاثيوبية</option>
-          <option value="الخطوط الجوية الأذربيجانية">الخطوط الجوية الأذربيجانية</option>
-          <option value="الخطوط الجوية الفرنسية">الخطوط الجوية الفرنسية</option>
-          <option value="الخطوط الجوية الكويتية">الخطوط الجوية الكويتية</option>
-          <option value="الخطوط السعودية">الخطوط السعودية</option>
-          <option value="الطيران العماني">الطيران العماني</option>
-          <option value="طيران السلام">طيران السلام</option>
-          <option value="الملكية الأردنية">الملكية الأردنية</option>
-          <option value="طيران الخليج">طيران الخليج</option>
-          <option value="طيران الشرق الأوسط">طيران الشرق الأوسط</option>
-          <option value="طيران ايجين">طيران ايجين</option>
-          <option value="فلاي اديل">فلاي اديل</option>
-          <option value="فلاي ناس">فلاي ناس</option>
-          <option value="فلاي دبي">فلاي دبي</option>
-          <option value="مصر للطيران">مصر للطيران</option>
-          <option value="النيل للطيران">النيل للطيران</option>
-          <option value="طيران الجزائر">طيران الجزائر</option>
-          <option value="تونساير (تونس)">تونساير (تونس)</option>
-          <option value="Royal Air Maroc (المغرب)">Royal Air Maroc (المغرب)</option>
-          <option value="الخطوط الجوية اللبنانية">الخطوط الجوية اللبنانية</option>
-          <option value="الخطوط الجوية السورية">الخطوط الجوية السورية</option>
-          <option value="الخطوط الجوية العراقية">الخطوط الجوية العراقية</option>
-          <option value="فلاي جدة (السعودية)">فلاي جدة (السعودية)</option>
-          <option value="الخطوط الجوية السنغافورية">الخطوط الجوية السنغافورية</option>
-          <option value="الخطوط الجوية الماليزية">الخطوط الجوية الماليزية</option>
-          <option value="الخطوط الجوية التايلاندية">الخطوط الجوية التايلاندية</option>
-          <option value="الهند للطيران (الهند)">الهند للطيران (الهند)</option>
-          <option value="سبايس جيت (الهند)">سبايس جيت (الهند)</option>
-          <option value="لوفتهانزا (ألمانيا)">لوفتهانزا (ألمانيا)</option>
-          <option value="الخطوط الجوية البريطانية (المملكة المتحدة)">الخطوط الجوية البريطانية (المملكة المتحدة)</option>
-          <option value="إير فرانس (فرنسا)">إير فرانس (فرنسا)</option>
-          <option value="إيبيريا (إسبانيا)">إيبيريا (إسبانيا)</option>
-          <option value="أليطاليا (إيطاليا)">أليطاليا (إيطاليا)</option>
-          <option value="خطوط إيجه الجوية (اليونان)">خطوط إيجه الجوية (اليونان)</option>
-          <option value="الخطوط الجوية الهولندية (KLM) (هولندا)">الخطوط الجوية الهولندية (KLM) (هولندا)</option>
-          <option value="طيران صربيا (صربيا)">طيران صربيا (صربيا)</option>
-          <option value="الخطوط الجوية الاسكندنافية (SAS)">الخطوط الجوية الاسكندنافية (SAS)</option>
-          <option value="Ryanair (أيرلندا) - النقل الجوي">Ryanair (أيرلندا) - النقل الجوي</option>
-          <option value="دلتا للطيران (الولايات المتحدة الأمريكية)">دلتا للطيران (الولايات المتحدة الأمريكية)</option>
-          <option value="أمريكان إيرلاينز (الولايات المتحدة الأمريكية)">أمريكان إيرلاينز (الولايات المتحدة الأمريكية)</option>
-          <option value="يونايتد إيرلاينز (الولايات المتحدة الأمريكية)">يونايتد إيرلاينز (الولايات المتحدة الأمريكية)</option>
-          <option value="طيران كندا (كندا)">طيران كندا (كندا)</option>
-          <option value="خطوط لاتام الجوية (تشيلي/البرازيل)">خطوط لاتام الجوية (تشيلي/البرازيل)</option>
-          <option value="طيران المكسيك (المكسيك)">طيران المكسيك (المكسيك)</option>
-          <option value="خطوط جنوب أفريقيا الجوية (جنوب أفريقيا)">خطوط جنوب أفريقيا الجوية (جنوب أفريقيا)</option>
-          <option value="أخرى">أخرى (أدخل يدويًا)</option>
+      
+      <div class="input-group">
+        <label for="to-city">إلى</label>
+        <select id="to-city" required>
+          <option value="">اختر المدينة</option>
+          <option value="عدن-ADE">عدن-ADE</option>
+          <option value="سيئون-GXF">سيئون-GXF</option>
+          <option value="الريان-RIY">الريان-RIY</option>
+          <option value="الغيضة-AAY">الغيضة-AAY</option>
+          <option value="سقطرى-SCT">سقطرى-SCT</option>
+          <option value="صنعاء-SAH">صنعاء-SAH</option>
+          <option value="القاهرة-CAI">القاهرة-CAI</option>
+          <option value="عمان-AMM">عمان-AMM</option>
+          <option value="جدة-JED">جدة-JED</option>
+          <option value="الرياض-RUH">الرياض-RUH</option>
+          <option value="دبي-DXB">دبي-DXB</option>
+          <option value="الكويت-KWI">الكويت-KWI</option>
+          <option value="جيبوتي-JIB">جيبوتي-JIB</option>
+          <option value="اديس-ADD">اديس-ADD</option>
+          <option value="مومباي-BOM">مومباي-BOM</option>
         </select>
-        <input type="text" id="returnCustomAirline" class="hidden" placeholder="أدخل اسم شركة الطيران">
       </div>
-
-      <div id="returnFlights">
-        <!-- Flight 1 -->
-        <div class="flight-leg" data-leg="1">
-          <button class="delete-btn" onclick="removeFlight(this)" style="display:none;">❌</button>
-          <h3>الرحلة 1</h3>
-          <div class="form-group">
-            <label>الإقلاع من مطار:</label>
-            <input type="text" class="departureAirport" placeholder="اسم مطار الإقلاع">
-          </div>
-          <div class="form-group">
-            <label>صاله المغادرة:</label>
-            <input type="text" class="departureTerminal" placeholder="مثال: الصالة 1 أو A">
-          </div>
-          <div class="form-group">
-            <label>وقت الإقلاع (24 ساعة):</label>
-            <input type="time" class="departureTime" onchange="updateArrivalDate(this)">
-          </div>
-          <div class="form-group">
-            <label>الوصول إلى مطار:</label>
-            <input type="text" class="arrivalAirport" placeholder="اسم مطار الوصول">
-          </div>
-          <div class="form-group">
-            <label>صاله الوصول:</label>
-            <input type="text" class="arrivalTerminal" placeholder="مثال: الصالة 2 أو B">
-          </div>
-          <div class="form-group">
-            <label>وقت الوصول (24 ساعة):</label>
-            <input type="time" class="arrivalTime">
-          </div>
-        </div>
+      
+      <div class="input-group">
+        <label for="flight-date">تاريخ الرحلة</label>
+        <input type="date" id="flight-date" required>
       </div>
-
-      <button type="button" onclick="addFlight('return')">+ إضافة رحلة تالية</button>
+      
+      <div class="input-group">
+        <label for="one-way-price">سعر الذهاب فقط ($)</label>
+        <input type="number" id="one-way-price" placeholder="أدخل السعر">
+      </div>
+      
+      <div class="input-group">
+        <label for="return-price">سعر الذهاب والعودة ($)</label>
+        <input type="number" id="return-price" placeholder="أدخل السعر (اختياري)">
+      </div>
+      
+      <div class="input-group">
+        <label for="notes">ملاحظات</label>
+        <input type="text" id="notes" placeholder="أدخل ملاحظات (اختياري)">
+      </div>
+      
+      <div class="input-group">
+        <label for="quantity">عدد الرحلات</label>
+        <input type="number" id="quantity" class="quantity" min="1" max="30" value="1">
+      </div>
+      
+      <div class="button-group">
+        <button onclick="addFlight()" class="add">➕ إضافة رحلة</button>
+        <button onclick="clearTable()" class="clear">🗑️ مسح الجدول</button>
+        <button onclick="window.print()" class="print">🖨️ طباعة</button>
+        <button onclick="downloadImage()" class="download">💾 تنزيل كصورة</button>
+        <button onclick="downloadText()" class="text">📝 تنزيل كملف نصي</button>
+      </div>
     </div>
-
-    <!-- Additional Fields -->
-    <div class="form-group">
-      <label for="price">السعر:</label>
-      <input type="number" id="price" placeholder="أدخل السعر" step="0.01">
+    
+    <div class="timestamp" id="timestamp">آخر تحديث : 16/10/2025 & الساعة: [01:25] ص</div>
+    
+    <div class="content">
+      <table id="flights-table">
+        <thead>
+          <tr>
+            <th>اليـــوم</th>
+            <th>التـــاريــخ</th>
+            <th>الإقــــــلاع مــــــن</th>
+            <th>الوصــول إلـــــى</th>
+            <th>السعر ذهـابا فـقــــــــط</th>
+            <th>الســعر ذهــاب و العـــــــودة</th>
+            <th>مـــلاحـظـات</th>
+            <th class="delete-header">حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
     </div>
-
-    <div class="form-group">
-      <label for="currency">العملة:</label>
-      <select id="currency">
-        <option value="usd">دولار أمريكي</option>
-        <option value="sar">ريال سعودي</option>
-      </select>
+    
+    <div class="footer">
+      للحجز او الاستفسار تواصل معنا : <a href="tel:778878820">778878820 - 778878810</a>
     </div>
-
-    <div class="form-group">
-      <label for="weight">الوزن المسموح:</label>
-      <input type="text" id="weight" placeholder="مثال: 15 كجم أو 1 شنطة أو بدون وزن">
-    </div>
-
-    <div class="form-group">
-      <label for="warning">ملاحظة / تحذير:</label>
-      <select id="warning">
-        <option value="">اختر ملاحظة...</option>
-        <option value="بعد الحجز لا تُعدل الرحلة ولا يُسترجع المبلغ">بعد الحجز لا تُعدل الرحلة ولا يُسترجع المبلغ</option>
-        <option value="الرحلة قريبة، وعليه بعد الحجز لا تُعدل الرحلة ولا يُسترجع المبلغ">الرحلة قريبة، وعليه بعد الحجز لا تُعدل الرحلة ولا يُسترجع المبلغ</option>
-        <option value="الرسوم ستكون قابلة للتغيير باختلاف الوقت الذي تتم فيه عملية الدفع">الرسوم ستكون قابلة للتغيير باختلاف الوقت الذي تتم فيه عملية الدفع</option>
-      </select>
-    </div>
-
-    <button onclick="downloadTripDetails()" style="width:100%; padding:14px; font-size:16px;">تنزيل تفاصيل الرحلة كملف نصي</button>
   </div>
 
   <script>
-    function toggleReturnSection() {
-      const returnSection = document.getElementById('returnSection');
-      if (document.getElementById('tripType').value === 'roundtrip') {
-        returnSection.classList.remove('hidden');
+    function updateTimestamp() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = now.getHours() >= 12 ? 'م' : 'ص';
+      const formattedHours = hours > 12 ? hours - 12 : (hours === 0 ? 12 : hours);
+      document.getElementById("timestamp").textContent = `آخر تحديث : ${day}/${month}/${year} & الساعة: [${String(formattedHours).padStart(2, '0')}:${minutes}] ${ampm}`;
+    }
+    
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      return `${day}‏/${month}‏/${year}`;
+    }
+    
+    function getDayName(dateString) {
+      const date = new Date(dateString);
+      const days = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+      return days[date.getDay()];
+    }
+    
+    function makeEditable(element, type = 'text', value = '') {
+      element.classList.remove('editable');
+      element.style.cursor = 'default';
+      let input;
+      if (type === 'date') {
+        input = document.createElement('input');
+        input.type = 'date';
+        const dateParts = value.split('/');
+        const year = dateParts[2];
+        const month = dateParts[1].padStart(2, '0');
+        const day = dateParts[0].padStart(2, '0');
+        input.value = `${year}-${month}-${day}`;
+      } else if (type === 'number') {
+        input = document.createElement('input');
+        input.type = 'number';
+        input.value = value.replace(' $', '').replace('-', '');
       } else {
-        returnSection.classList.add('hidden');
+        input = document.createElement('input');
+        input.type = 'text';
+        input.value = value === '-' ? '' : value;
       }
-    }
-
-    function checkCustomAirline(select, customInputId) {
-      const customInput = document.getElementById(customInputId);
-      if (select.value === 'أخرى') {
-        customInput.classList.remove('hidden');
-      } else {
-        customInput.classList.add('hidden');
-      }
-    }
-
-    function addFlight(tripType) {
-      const container = document.getElementById(`${tripType}Flights`);
-      const legNumber = container.children.length + 1;
-      const legDiv = document.createElement('div');
-      legDiv.className = 'flight-leg';
-      legDiv.setAttribute('data-leg', legNumber);
-      legDiv.innerHTML = `
-        <button class="delete-btn" onclick="removeFlight(this)">❌</button>
-        <h3>الرحلة ${legNumber}</h3>
-        <div class="form-group">
-          <label>الإقلاع من مطار:</label>
-          <input type="text" class="departureAirport" placeholder="اسم مطار الإقلاع">
-        </div>
-        <div class="form-group">
-          <label>صاله المغادرة:</label>
-          <input type="text" class="departureTerminal" placeholder="مثال: الصالة 1 أو A">
-        </div>
-        <div class="form-group">
-          <label>وقت الإقلاع (24 ساعة):</label>
-          <input type="time" class="departureTime" onchange="updateArrivalDate(this)">
-        </div>
-        <div class="form-group">
-          <label>الوصول إلى مطار:</label>
-          <input type="text" class="arrivalAirport" placeholder="اسم مطار الوصول">
-        </div>
-        <div class="form-group">
-          <label>صاله الوصول:</label>
-          <input type="text" class="arrivalTerminal" placeholder="مثال: الصالة 2 أو B">
-        </div>
-        <div class="form-group">
-          <label>وقت الوصول (24 ساعة):</label>
-          <input type="time" class="arrivalTime">
-        </div>
-      `;
-      container.appendChild(legDiv);
-    }
-
-    function removeFlight(button) {
-      const legDiv = button.closest('.flight-leg');
-      const container = legDiv.parentElement;
-      if (container.children.length > 1) {
-        legDiv.remove();
-      } else {
-        alert('لا يمكن حذف الرحلة الوحيدة.');
-      }
-    }
-
-    function updateArrivalDate(departureTimeInput) {
-      // يمكن إضافة منطق هنا لتعديل التاريخ إذا كانت الرحلة تستمر لليوم التالي
-      // لكن في هذا النموذج، نعتمد على التاريخ العام للرحلة وليس لكل رحلة فرعية
-    }
-
-    function formatTimeToArabic(time24) {
-      if (!time24) return '';
-      const [hours, minutes] = time24.split(':').map(Number);
-      let period = '';
-      let displayHour = hours;
-
-      if (hours === 0) {
-        displayHour = 12;
-        period = 'بعد منتصف الليل';
-      } else if (hours < 12) {
-        period = 'صباحاً';
-      } else if (hours === 12) {
-        period = 'ظهراً';
-      } else if (hours < 18) {
-        displayHour = hours - 12;
-        period = 'بعد الظهر';
-      } else if (hours < 21) {
-        displayHour = hours - 12;
-        period = 'مساءً';
-      } else {
-        displayHour = hours - 12;
-        period = 'ليلاً';
-      }
-
-      return `${displayHour}:${minutes.toString().padStart(2, '0')} ${period}`;
-    }
-
-    function calculateLayover(arrivalTime, nextDepartureTime) {
-      if (!arrivalTime || !nextDepartureTime) return 'غير محدد';
-
-      const [h1, m1] = arrivalTime.split(':').map(Number);
-      const [h2, m2] = nextDepartureTime.split(':').map(Number);
-
-      let totalMinutes1 = h1 * 60 + m1;
-      let totalMinutes2 = h2 * 60 + m2;
-
-      if (totalMinutes2 < totalMinutes1) {
-        totalMinutes2 += 24 * 60; // next day
-      }
-
-      const diffMinutes = totalMinutes2 - totalMinutes1;
-      const hours = Math.floor(diffMinutes / 60);
-      const minutes = diffMinutes % 60;
-
-      let result = '';
-      if (hours > 0) result += `${hours} ${hours === 1 ? 'ساعة' : 'ساعات'}`;
-      if (minutes > 0) {
-        if (result) result += ' و';
-        result += `${minutes} ${minutes === 1 ? 'دقيقة' : 'دقائق'}`;
-      }
-      if (!result) result = 'دقيقة واحدة';
-
-      return result;
-    }
-
-    function formatDateToArabic(dateString) {
-      const months = [
-        'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
-      ];
-      const d = new Date(dateString);
-      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}م`;
-    }
-
-    function shouldShowDate(time) {
-      if (!time) return false;
-      const hour = parseInt(time.split(':')[0]);
-      return hour >= 21;
-    }
-
-    function renderTripSection(tripType, title) {
-      const dateInput = document.getElementById(`${tripType}Date`).value;
-      const airlineSelect = document.getElementById(`${tripType}Airline`);
-      const customAirline = document.getElementById(`${tripType}CustomAirline`);
-      let airline = airlineSelect.value;
-      if (airline === 'أخرى') airline = customAirline.value || 'غير محدد';
-
-      let output = `\n${title}\n`;
-      output += `بتاريخ ${formatDateToArabic(dateInput)}.\n`;
-      output += `الرحلة عبر طيران ${airline}\n\n`;
-
-      const legs = Array.from(document.querySelectorAll(`#${tripType}Flights .flight-leg`));
-      for (let i = 0; i < legs.length; i++) {
-        const leg = legs[i];
-        const depAirport = leg.querySelector('.departureAirport').value || 'غير محدد';
-        const depTerminal = leg.querySelector('.departureTerminal').value || 'غير محدد';
-        const depTime = leg.querySelector('.departureTime').value;
-        const arrAirport = leg.querySelector('.arrivalAirport').value || 'غير محدد';
-        const arrTerminal = leg.querySelector('.arrivalTerminal').value || 'غير محدد';
-        const arrTime = leg.querySelector('.arrivalTime').value;
-
-        if (i === 0) {
-          // Calculate check-in time: 4 hours before departure
-          if (depTime) {
-            const [h, m] = depTime.split(':').map(Number);
-            let checkInHour = h - 4;
-            let checkInDate = dateInput;
-            if (checkInHour < 0) {
-              checkInHour += 24;
-              // Adjust date backward (simplified)
-            }
-            const checkInTime = `${String(checkInHour).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-            output += `️🎫 الحضور إلى مطار عند الساعة ${formatTimeToArabic(checkInTime)} بتوقيت مدينة ${depAirport} \n`;
-            output += '====================\n\n';
-          }
-        }
-
-        output += `✈️ الإقلاع من مطار ${depAirport} الساعة ${formatTimeToArabic(depTime)} بتوقيت مدينة ${depAirport}\n`;
-        if (depTerminal && depTerminal !== 'غير محدد') {
-          output += `📍 صاله المغادرة: ${depTerminal}\n`;
-        }
-        output += '\n';
-
-        output += `🛬 الوصول إلى مطار ${arrAirport} الساعة ${formatTimeToArabic(arrTime)} بتوقيت مدينة ${arrAirport}\n`;
-        if (arrTerminal && arrTerminal !== 'غير محدد') {
-          output += `📍 صاله الوصول: ${arrTerminal}\n`;
-        }
-
-        // Show arrival date if departure was after 21:00
-        if (shouldShowDate(depTime)) {
-          const nextDate = new Date(dateInput);
-          nextDate.setDate(nextDate.getDate() + 1);
-          output += ` في تاريخ ${formatDateToArabic(nextDate.toISOString().split('T')[0])} م\n`;
-        }
-
-        // Layover
-        if (i < legs.length - 1) {
-          const nextLeg = legs[i + 1];
-          const nextDepTime = nextLeg.querySelector('.departureTime').value;
-          const layover = calculateLayover(arrTime, nextDepTime);
-          output += `\n✈️✈️✈️✈️✈️✈️\n\n⏰ ترانزيت (انتظار) ${layover} \n\n✈️✈️✈️✈️✈️✈️\n\n`;
-        }
-      }
-
-      output += '\n====================\n';
-      output += `انتهت ${title === 'أولاً: تفاصيل رحلة الذهاب' ? 'رحلة الذهاب' : 'رحلة العودة'} \n`;
-      output += '====================\n';
-
-      return output;
-    }
-
-    function downloadTripDetails() {
-      const passengerName = document.getElementById('passengerName').value.trim();
-      if (!passengerName) {
-        alert('⚠️ يرجى إدخال اسم المسافر.');
-        return;
-      }
-
-      const outboundDep = document.querySelector('#outboundFlights .departureAirport');
-      if (!outboundDep || !outboundDep.value.trim()) {
-        alert('⚠️ يرجى إدخال مطار الإقلاع لرحلة الذهاب.');
-        return;
-      }
-
-      let fullText = `*تفاصيل رحلة الطيران*\n*شركة خاطرك للسفريات والسياحة*\n\nعزيزي المسافر: ${passengerName} \n\n✒️ *اليك تفاصيل الرحلة المطلوبة*\n`;
-
-      fullText += renderTripSection('outbound', 'أولاً: تفاصيل رحلة الذهاب');
-
-      if (document.getElementById('tripType').value === 'roundtrip') {
-        fullText += '\n\n';
-        fullText += renderTripSection('return', 'ثانياً: تفاصيل رحلة العودة');
-      }
-
-      // Price
-      const price = document.getElementById('price').value;
-      const currency = document.getElementById('currency').value;
-      if (price) {
-        if (currency === 'usd') {
-          const sar = (parseFloat(price) * 3.83).toFixed(2);
-          fullText += `\nالسعر: ${price} دولار أمريكي (${sar} ريال سعودي)`;
+      input.style.width = '100%';
+      input.style.padding = '8px';
+      input.style.border = '2px solid #0055aa';
+      input.style.borderRadius = '8px';
+      input.style.textAlign = 'center';
+      input.style.fontSize = '14px';
+      element.innerHTML = '';
+      element.appendChild(input);
+      input.focus();
+      input.addEventListener('blur', function() {
+        let displayValue = input.value;
+        if (type === 'date' && input.value) {
+          const date = new Date(input.value);
+          const formattedDate = formatDate(input.value);
+          const dayName = getDayName(input.value);
+          element.textContent = formattedDate;
+          const dayCell = element.parentElement.children[0];
+          dayCell.textContent = dayName;
+        } else if (type === 'number') {
+          displayValue = displayValue ? `${displayValue} $` : '-';
         } else {
-          const usd = (parseFloat(price) / 3.83).toFixed(2);
-          fullText += `\nالسعر: ${price} ريال سعودي (${usd} دولار أمريكي)`;
+          displayValue = displayValue || '-';
         }
-      }
-
-      // Weight
-      const weight = document.getElementById('weight').value.trim();
-      if (weight) {
-        fullText += `\nالوزن المسموح: ${weight}`;
-      }
-
-      // Warning
-      const warning = document.getElementById('warning').value;
-      if (warning) {
-        fullText += `\n\n*ملاحظة مهمه جدا*: ${warning}`;
-      }
-
-      // Footer
-      fullText += `\n\n✈️✈️✈️✈️✈️✈️\n\n*خاطرك للسفريات والسياحة وخدمات الحج والعمرة*\n\n*📱: 778878820*\n*  https://wa.me/967778878820        *`;
-
-      const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `رحلة_${passengerName.replace(/\s+/g, '_')}.txt`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+        element.textContent = displayValue;
+        element.classList.add('editable');
+        element.style.cursor = 'pointer';
+        updateTimestamp();
+      });
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          input.blur();
+        }
+      });
     }
-
-    // Set default date to 2025
-    document.getElementById('outboundDate').value = '2025-10-12';
-    document.getElementById('returnDate').value = '2025-11-11';
+    
+    function addFlight() {
+      const from = document.getElementById("from-city").value;
+      const to = document.getElementById("to-city").value;
+      const date = document.getElementById("flight-date").value;
+      const oneWay = document.getElementById("one-way-price").value;
+      const returnPrice = document.getElementById("return-price").value;
+      const notes = document.getElementById("notes").value;
+      const quantity = parseInt(document.getElementById("quantity").value) || 1;
+      
+      if (!from || !to || !date || !oneWay) {
+        alert("يرجى تعبئة جميع الحقول المطلوبة.");
+        return;
+      }
+      
+      const formattedDate = formatDate(date);
+      const dayName = getDayName(date);
+      const tbody = document.querySelector("#flights-table tbody");
+      
+      for (let i = 0; i < quantity; i++) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td class="editable day-bold">${dayName}</td>
+          <td class="editable date-bold">${formattedDate}</td>
+          <td>${from}</td>
+          <td>${to}</td>
+          <td class="editable one-way">${oneWay} $</td>
+          <td class="editable return">${returnPrice ? returnPrice + ' $' : '-'}</td>
+          <td class="editable">${notes || '-'}</td>
+          <td class="delete-column"><button class="delete-btn" onclick="deleteRow(this)">×</button></td>
+        `;
+        tbody.appendChild(row);
+      }
+      
+      const newEditableCells = tbody.querySelectorAll('.editable');
+      newEditableCells.forEach(cell => {
+        cell.addEventListener('click', function(e) {
+          if (e.target === cell || e.target.classList.contains('editable')) {
+            let type = 'text';
+            let value = cell.textContent;
+            if (cell.classList.contains('date-bold')) {
+              type = 'date';
+            } else if (cell.classList.contains('one-way') || cell.classList.contains('return')) {
+              type = 'number';
+              value = value.replace(' $', '').replace('-', '');
+            } else if (cell.classList.contains('day-bold')) {
+              type = 'text';
+            }
+            makeEditable(cell, type, value);
+          }
+        });
+      });
+      
+      document.getElementById("from-city").value = "";
+      document.getElementById("to-city").value = "";
+      document.getElementById("flight-date").value = "";
+      document.getElementById("one-way-price").value = "";
+      document.getElementById("return-price").value = "";
+      document.getElementById("notes").value = "";
+      updateTimestamp();
+    }
+    
+    function deleteRow(button) {
+      if (confirm("هل أنت متأكد من رغبتك في حذف هذه الرحلة؟")) {
+        const row = button.closest("tr");
+        row.remove();
+        updateTimestamp();
+      }
+    }
+    
+    function clearTable() {
+      if (confirm("هل أنت متأكد من رغبتك في مسح جميع الرحلات؟")) {
+        const tbody = document.querySelector("#flights-table tbody");
+        tbody.innerHTML = "";
+        updateTimestamp();
+      }
+    }
+    
+    async function downloadImage() {
+      const controls = document.querySelector('.controls');
+      const deleteHeader = document.querySelector('.delete-header');
+      const deleteColumns = document.querySelectorAll('.delete-column');
+      
+      controls.style.display = 'none';
+      deleteHeader.style.display = 'none';
+      deleteColumns.forEach(col => col.style.display = 'none');
+      
+      const element = document.getElementById("print-area");
+      try {
+        const canvas = await html2canvas(element, { 
+          scale: 2, 
+          useCORS: true,
+          backgroundColor: null
+        });
+        const link = document.createElement("a");
+        link.download = `أسعار-الطيران-خاطرك-${new Date().toLocaleDateString('ar-SA')}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      } catch (err) {
+        alert("حدث خطأ أثناء حفظ الصورة.");
+        console.error(err);
+      } finally {
+        controls.style.display = '';
+        deleteHeader.style.display = '';
+        deleteColumns.forEach(col => col.style.display = '');
+      }
+    }
+    
+    function downloadText() {
+      const rows = document.querySelectorAll("#flights-table tbody tr");
+      if (rows.length === 0) {
+        alert("لا توجد بيانات لتنزيلها.");
+        return;
+      }
+      
+      let textData = "خاطرك للسفريات والسياحة - أسعار تذاكر الطيران\n";
+      textData += "============================================\n";
+      textData += "اليوم\tالتاريخ\tمن\tإلى\tسعر الذهاب\tسعر الذهاب والعودة\tملاحظات\n";
+      textData += "----\t------\t--\t--\t-----------\t------------------\t--------\n";
+      
+      rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        const rowData = [
+          cells[0].textContent.trim(),
+          cells[1].textContent.trim(),
+          cells[2].textContent.trim(),
+          cells[3].textContent.trim(),
+          cells[4].textContent.trim(),
+          cells[5].textContent.trim(),
+          cells[6].textContent.trim()
+        ];
+        textData += rowData.join("\t") + "\n";
+      });
+      
+      textData += "\n============================================\n";
+      textData += `تم التحديث: ${document.getElementById("timestamp").textContent}\n`;
+      textData += "للحجز والاستفسار: 778878820 - 778878810";
+      
+      const blob = new Blob([textData], { type: "text/plain;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `أسعار-الطيران-خاطرك-${new Date().toLocaleDateString('ar-SA')}.txt`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTimestamp();
+      document.addEventListener('click', function(e) {
+        const cell = e.target.closest('.editable');
+        if (cell && !e.target.closest('input')) {
+          let type = 'text';
+          let value = cell.textContent;
+          if (cell.classList.contains('date-bold')) {
+            type = 'date';
+          } else if (cell.classList.contains('one-way') || cell.classList.contains('return')) {
+            type = 'number';
+            value = value.replace(' $', '').replace('-', '');
+          } else if (cell.classList.contains('day-bold')) {
+            type = 'text';
+          }
+          makeEditable(cell, type, value);
+        }
+      });
+    });
   </script>
 </body>
 </html>
+```
